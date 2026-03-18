@@ -13,7 +13,18 @@ export async function GET(request)
     }
 
     // Creating the session
-    const authResult  = scalekit.authenticateWithCode(code, redirectURL);
+    const session = await scalekit.authenticateWithCode(code, redirectURL);
+    console.log("Session is ",session);
+    const response = NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}`);
     
-    NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}`)
+    // Setting the cookie
+    response.cookies.set("access token", session.accessToken,{
+        httpOnly:true,
+        maxAge:24*60*60*1000,
+        secure:false,
+        path:"/"
+    });
+
+    return response;
+
 };
