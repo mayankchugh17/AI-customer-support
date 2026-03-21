@@ -210,7 +210,7 @@ function Home({ email }) {
                     key={index}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.3 }}
+                    transition={{ delay: index * 0.1 }}
                     viewport={{ once: false }}
                   >
                     <h1 className="text-lg font-medium ">{feature.title}</h1>
