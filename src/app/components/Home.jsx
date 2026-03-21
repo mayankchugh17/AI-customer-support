@@ -33,6 +33,23 @@ function Home({ email }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  // Array for Features
+
+  const features = [
+    {
+      title: "Plug & Play",
+      description: "Add the chatbot to your site with a single script tag.",
+    },
+    {
+      title: "Admin Controlled",
+      description: "You control exactly what the AI knows and answers.",
+    },
+    {
+      title: "Always Online",
+      description: "Your customers get instant support 24/7",
+    },
+  ];
+
   return (
     <>
       <div className="min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden">
@@ -125,7 +142,12 @@ function Home({ email }) {
                     Get Started
                   </button>
                 )}
-                <button className=" px-5 md:px-7 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition">
+                <button
+                  className="px-5 md:px-7 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition"
+                  onClick={() => {
+                    window.location.href = "#features";
+                  }}
+                >
                   Learn More
                 </button>
               </div>
@@ -139,23 +161,68 @@ function Home({ email }) {
               className="relative"
             >
               <div className="rounded-2xl bg-white shadow-2xl border border-zinc-200 p-6">
-                <div className="text-sm text-zinc-500 mb-3">Live Chat Preview</div>
-                
+                <div className="text-sm text-zinc-500 mb-3">
+                  Live Chat Preview
+                </div>
+
                 {/* Chats user with AI */}
                 <div className="space-y-3">
-                  <div className="bg-zinc-100 rounded-lg px-4 py-2 text-sm w-fit">
+                  <div className="bg-black text-white rounded-lg px-4 py-2 text-sm ml-auto w-fit">
                     Do you offer cash on delivery?
                   </div>
-                   <div className="bg-black text-white rounded-lg px-4 py-2 text-sm ml-auto w-fit">
+                  <div className="bg-zinc-100 rounded-lg px-4 py-2 text-sm w-fit">
                     Yes, Cash On Delivery is available
                   </div>
-                <motion.div animate={{y:[0, -12, 0]}} transition={{repeat: Infinity, duration: 3 }} className="absolute -bottom-6 -right-4 md:-right-6  w-12 h-12 md:h-13 md:w-13 rounded-full bg-black text-white text-lg flex items-center justify-center shadow-xl">
-                  🗨️
-
-                </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ repeat: Infinity, duration: 3 }}
+                    className="absolute -bottom-6 -right-4 md:-right-6  w-12 h-12 md:h-13 md:w-13 rounded-full bg-black text-white text-lg flex items-center justify-center shadow-xl"
+                  >
+                    🗨️
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        <section
+          className="bg-zinc-50 py-28 px-6 border-t border-zinc-200"
+          id="features"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl md:text-4xl font-semibold text-center"
+            >
+              Why Businesses Choose SupportAI
+            </motion.h2>
+
+            {/* Cards */}
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+              {features.map((feature, index) => {
+                return (
+                  <motion.div
+                    className="bg-white rounded-2xl p-8 shadow-lg border border-zinc-200"
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.3 }}
+                    viewport={{ once: false }}
+                  >
+                    <h1 className="text-lg font-medium ">{feature.title}</h1>
+                    <p className="mt-3 text-zinc-600 text-sm ">
+                      {feature.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            
           </div>
         </section>
       </div>
