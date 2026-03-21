@@ -3,27 +3,27 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 function Home({ email }) {
+  
+  // Go to login Page
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
   };
 
   const [open, setOpen] = useState(false);
   const popUpRef = useRef(null);
-  useEffect(()=>{
-    const handler = (e) =>{
-      if(popUpRef.current && !popUpRef.current.contains(e.target))
-      {
-        setOpen(false)
+  useEffect(() => {
+    const handler = (e) => {
+      if (popUpRef.current && !popUpRef.current.contains(e.target)) {
+        setOpen(false);
       }
-    }
-    document.addEventListener("mousedown", handler)
-    return () => document.removeEventListener("mousedown", handler)
-    
-  }, [])
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const firstLetter = email ? email[0].toUpperCase() : "";
 
-  useEffect(()=>{
+  useEffect(() => {
     const handler = (e) => {
       if (popUpRef.current && !popUpRef.current.contains(e.target)) {
         setOpen(false);
@@ -49,8 +49,10 @@ function Home({ email }) {
             </div>
 
             {email ? (
-              <div ref={popUpRef} className="relative w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold hover:scale-105 transition">
-                
+              <div
+                ref={popUpRef}
+                className="relative w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold hover:scale-105 transition"
+              >
                 <button
                   onClick={() => {
                     setOpen(!open);
@@ -61,9 +63,9 @@ function Home({ email }) {
                 <AnimatePresence>
                   {open && (
                     <motion.div
-                      initial={{opacity:0, y:-6}}
-                      animate={{opacity:1, y:0}}
-                      exit={{opacity:0, y:-6}}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
                       className="absolute text-black right-0 top-13 w-44 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden"
                     >
                       <button
@@ -92,6 +94,42 @@ function Home({ email }) {
             )}
           </div>
         </motion.div>
+
+        <section className="pt-36 pb-28 px-6">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className=""
+            >
+              <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
+                AI Customer Support <br /> Build for Modern Websites{" "}
+              </h1>
+              <p className="mt-6 text-lg text-zinc-600 max-w-xl">
+                Add a powerful AI chatbot to your website in minutes. Let your
+                customers get instant answers using your own business knowledge.
+              </p>
+
+              <div className="flex mt-10 gap-4">
+                {email ? (
+                  <button className=" px-5 md:px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60">
+                    <span className="hidden md:block">Go to Dashboard</span>
+                    <span className="md:hidden">Dashboard</span>
+                  </button>
+                ) : (
+                  <button className=" px-5 md:px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60" onClick={handleLogin}>
+                    Get Started
+                  </button>
+                )}
+                <button className=" px-5 md:px-7 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition">
+                  Learn More
+                </button>
+              </div>
+            </motion.div>
+            <div className=""></div>
+          </div>
+        </section>
       </div>
     </>
   );
