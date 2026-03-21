@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 function Home({ email }) {
-  
   // Go to login Page
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
@@ -97,6 +96,7 @@ function Home({ email }) {
 
         <section className="pt-36 pb-28 px-6">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            {/* Left Section */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -118,7 +118,10 @@ function Home({ email }) {
                     <span className="md:hidden">Dashboard</span>
                   </button>
                 ) : (
-                  <button className=" px-5 md:px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60" onClick={handleLogin}>
+                  <button
+                    className=" px-5 md:px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60"
+                    onClick={handleLogin}
+                  >
                     Get Started
                   </button>
                 )}
@@ -127,7 +130,28 @@ function Home({ email }) {
                 </button>
               </div>
             </motion.div>
-            <div className=""></div>
+
+            {/* Right Section */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="rounded-2xl bg-white shadow-2xl border border-zinc-200 p-6">
+                <div className="text-sm text-zinc-500 mb-3">Live Chat Preview</div>
+                
+                {/* Chats user with AI */}
+                <div className="space-y-4">
+                  <div className="bg-zinc-100 rounded-lg px-4 py-2 text-sm">
+                    Do you offer cash on delivery?
+                  </div>
+                   <div className="bg-black text-white rounded-lg px-4 py-2 text-sm ml-auto w-fit">
+                    Yes, Cash On Delivery is available
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
       </div>
