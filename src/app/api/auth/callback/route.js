@@ -6,7 +6,7 @@ export async function GET(request)
    const { searchParams } = new URL(request.url);
    const code = searchParams.get("code");
     const redirectURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/callback`;
-
+    console.log("2nd redirectURL is ", redirectURL)
     if(!code)
     {
         return NextResponse.status(400).json({message:"Code is not found"})
@@ -14,7 +14,7 @@ export async function GET(request)
 
     // Creating the session
     const session = await scalekit.authenticateWithCode(code, redirectURL);
-    console.log("Session is ",session);
+    // console.log("Session is ",session);
     const response = NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}`);
     
     // Setting the cookie

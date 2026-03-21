@@ -1,10 +1,13 @@
 import Home from "../components/Home.jsx";
+import { getSession } from "../lib/getSession.js";
 
-function ChatAiApp()
+async function ChatAiApp()
 {
+    const userSession = await getSession();
+    // console.log("user Session is ", userSession);
     return (
         <>
-            <Home />
+            <Home email={userSession?.user?.email} />
         </>
     );
 }
