@@ -1,12 +1,24 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import axios from "axios";
 
 function Home({ email }) {
+
   // Go to login Page
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
   };
+
+  // Logout Handle 
+  const handleLogout = async () =>{
+    try {
+        const result = await axios.get("/api/auth/logout");
+        window.location.href = "/";
+    } catch (error) {
+        console.log(error)
+    }
+  }
 
   const [open, setOpen] = useState(false);
   const popUpRef = useRef(null);
@@ -85,14 +97,13 @@ function Home({ email }) {
                       className="absolute text-black right-0 top-13 w-44 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden"
                     >
                       <button
-                        onClick={() => setOpen(false)}
                         className="w-full text-left px-4 py-3 text-sm md:text-lg hover:bg-zinc-100"
                       >
                         Dashboard
                       </button>
                       <button
-                        onClick={() => setOpen(false)}
                         className="block px-4 py-3 text-sm md:text-lg text-red-600 hover:bg-zinc-100"
+                        onClick={handleLogout}
                       >
                         Logout
                       </button>
