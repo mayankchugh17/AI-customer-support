@@ -85,7 +85,7 @@ function Home({ email }) {
             ) : (
               <button
                 onClick={handleLogin}
-                className="btn text-lg md:text-2xl px-5 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 flex items-center gap-2 "
+                className="btn text-lg md:text-xl px-5 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 flex items-center gap-2 "
               >
                 Login
               </button>
