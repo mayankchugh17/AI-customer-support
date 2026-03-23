@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 function Home({ email }) {
+
+  // Navigation
+  const navigate = useRouter();
 
   // Go to login Page
   const handleLogin = () => {
@@ -20,6 +24,7 @@ function Home({ email }) {
     }
   }
 
+
   const [open, setOpen] = useState(false);
   const popUpRef = useRef(null);
   useEffect(() => {
@@ -33,17 +38,6 @@ function Home({ email }) {
   }, []);
 
   const firstLetter = email ? email[0].toUpperCase() : "";
-
-  useEffect(() => {
-    const handler = (e) => {
-      if (popUpRef.current && !popUpRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
 
   // Array for Features
 
@@ -98,6 +92,7 @@ function Home({ email }) {
                     >
                       <button
                         className="w-full text-left px-4 py-3 text-sm md:text-lg hover:bg-zinc-100"
+                        onClick={()=>{ navigate.push("/dashboard") }}
                       >
                         Dashboard
                       </button>
@@ -141,7 +136,9 @@ function Home({ email }) {
 
               <div className="flex mt-10 gap-4">
                 {email ? (
-                  <button className=" px-5 md:px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60">
+                  <button className=" px-5 md:px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60"
+                  onClick={()=>{ navigate.push("/dashboard") }}
+                  >
                     <span className="hidden md:block">Go to Dashboard</span>
                     <span className="md:hidden">Dashboard</span>
                   </button>
