@@ -75,7 +75,7 @@ function Home({ email }) {
             {email ? (
               <div
                 ref={popUpRef}
-                className="relative w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold hover:scale-105 transition"
+                className="relative w-7 h-7 md:w-10 md:h-10 rounded-full bg-black text-white flex text-sm md:text-lg items-center justify-center font-semibold hover:scale-105 transition"
               >
                 <button
                   onClick={() => {

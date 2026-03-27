@@ -24,6 +24,7 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const { ownerId, businessName, supportEmail, knowledge } = await req.json();
+    console.log("Api Hit")
     if (!ownerId) {
       return NextResponse.json(
         { message: "Owner Id is required" },
