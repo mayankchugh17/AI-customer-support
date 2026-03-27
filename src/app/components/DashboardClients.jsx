@@ -13,7 +13,7 @@ export default function DashboardClient({ ownerId }) {
   const [loading, setLoading] = useState(false);
 
   // POST API
-  const handleSettings = async (params) => {
+  const handleSettings = async () => {
 
     // Set Loader
     setLoading(true);
@@ -70,7 +70,7 @@ export default function DashboardClient({ ownerId }) {
             </div>
 
             <div className="mb-10">
-              <h1 className="text-lg font-medium mb-4">Business Details</h1>
+              <h1 className="text-sm font-medium mb-4">Business Details</h1>
               <div className="space-y-4">
                 <input
                   type="text"
@@ -94,7 +94,7 @@ export default function DashboardClient({ ownerId }) {
             </div>
 
             <div className="mb-10">
-              <h1 className="text-lg font-medium mb-4">Knowledge Base</h1>
+              <h1 className="text-sm font-medium mb-4 ">Knowledge Base</h1>
               <p className="text-sm text-zinc-500 mb-4">
                 Add FAQs, policies, delivery info, refunds, etc.
               </p>
@@ -119,7 +119,7 @@ export default function DashboardClient({ ownerId }) {
                   whileTap={{ scale: 0.97 }}
                   disabled={loading}
                   onClick={handleSettings}
-                  className="px-7 py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-zinc-400 transition disabled:opacity-60"
+                  className="px-7 mt-3 py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-zinc-400 transition disabled:opacity-60"
                 >
                   { loading ?  "Saving..." : "Save"}
                 </motion.button>

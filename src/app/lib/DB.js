@@ -1,32 +1,39 @@
-import { connect } from "mongoose";
+import mongoose from "mongoose";
 
-const mongoURL = process.env.MONGODB_URL;
+const MONGODB_URI = process.env.MONGODB_URL;
 
-if(!mongoURL){
-    console.log("Mongo DB URL not Found");
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URL environment variable");
 }
 
-let cache = global.mongoose
-if(!cache)
-{
-    cache = global.mongoose = { conn:null, Promise:null}
+// global cache (important for Next.js hot reload)
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
 }
 
-export const connectDB = async () =>{
-    if(cache.conn)
-    {
-        return cache.conn;
-    }
+export const connectDB = async () => {
+  if (cached.conn) {
+    return cached.conn;
+  }
 
-    if(!cache.Promise){
-        cache.Promise = connect(mongoURL).then((c)=>{c.connection})
-    }
-    
-    try {
-        cache.conn = await cache.Promise;
-   } catch (error) {
-    console.log(error)        
-    }
-    return cache.conn;
-}
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, {
+      dbName: "SUPPORTAI", // optional but recommended
+      bufferCommands: false,
+    }).then((mongooseInstance) => {
+      console.log("✅ MongoDB Connected");
+      return mongooseInstance; // ✅ return properly
+    });
+  }
 
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    cached.promise = null;
+    throw error;
+  }
+
+  return cached.conn;
+};
