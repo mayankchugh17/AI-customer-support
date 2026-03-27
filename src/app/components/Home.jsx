@@ -59,6 +59,8 @@ function Home({ email }) {
   return (
     <>
       <div className="min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden">
+        
+        {/* Navbar */}
         <motion.div
           initial={{ y: -50 }}
           animate={{ y: 0 }}
@@ -116,6 +118,8 @@ function Home({ email }) {
             )}
           </div>
         </motion.div>
+
+        {/* Main */}
 
         <section className="pt-36 pb-28 px-6">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">

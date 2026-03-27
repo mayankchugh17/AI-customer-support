@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const SettingsSchema = new mongoose.Schema({
     ownerId: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     businessName: {
         type: String,
