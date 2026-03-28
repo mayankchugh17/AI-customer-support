@@ -1,6 +1,7 @@
 import Settings from "@/app/models/Settings";
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { connectDB } from "@/app/lib/DB";
 
 export async function POST(req) {
   try {
@@ -11,6 +12,7 @@ export async function POST(req) {
       }).status(400);
     }
 
+    await connectDB();
     const settings = await Settings.findOne({ ownerId });
     if (!settings) {
       return NextResponse.json({
@@ -20,9 +22,9 @@ export async function POST(req) {
 
     // Knowledge of business
     const KNOWLEDGE =  
-    `business name- ${settings.businessName} || not provided
-    support email- ${settings.supportEmail} || not provided
-    knowledge- ${settings.knowledge} || not provided
+    `business name- ${settings.businessName || "not provided"}
+    support email- ${settings.supportEmail || "not provided"}
+    knowledge- ${settings.knowledge || "not provided"}
     `;
 
     // Prompt of AI
@@ -50,9 +52,10 @@ ${message}
 ANSWER
 ------------------------`;
 
+// GEMINI API KEY
 const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
 
-
+// Response By Gemini
 const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: prompt,
