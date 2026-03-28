@@ -5,15 +5,22 @@ import { NextResponse } from "next/server";
 //GET API
 export async function GET(req) {
   try {
+    console.log("GET API Called");
+
     await connectDB();
-    const { ownerId } = await req.json();
+    const { searchParams } = new URL(req.url);
+    // console.log("Search Params",searchParams);
+    const ownerId = searchParams.get("ownerId");
+    // console.log("Owner ID is ", ownerId);
     if (!ownerId) {
       return NextResponse.json(
         { message: "Owner Id is required" },
         { status: 400 },
       );
     }
-    const result = await Settings.findById({ownerId});
+    const result = await Settings.findOne({ownerId});
+    console.log("User is ", result);
+
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json({ message: "Settings error" }, { status: 500 });
