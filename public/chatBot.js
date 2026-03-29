@@ -1,3 +1,4 @@
+
 (function () {
   const api_url = "http://localhost:3000/api/chat";
   const scriptTag = document.currentScript;
@@ -112,15 +113,48 @@
     messageArea.scrollTop=messageArea.scrollHeight;
   }
 
-  sendBtn.onclick=()=>{
+  sendBtn.onclick = async ()=>{
     const text = input.value.trim();
 
    
     if(!text)
     {
-        return;
+      return;
     }
     addMessage(text, "user")
     input.value="";
+
+    // Creating typing by AI
+    const typing = document.createElement("div");
+    typing.innerHTML="Typing...";
+    Object.assign(typing.style,{
+      fontSize:"12px",
+      color:"#6b7280",
+      marginBottom:"8px",
+      alignSelf:"flex-start"
+    })
+
+    messageArea.appendChild(typing);
+    messageArea.scrollTop=messageArea.scrollHeight();
+
+    // Getting response from Gemini
+    try {
+      const response = await fetch(api_url,{
+        method:"POST",
+        headers:{"content-Type":"application/json"},
+        body:JSON.stringify({
+          ownerId, message:text
+        })
+      })
+
+      const data = await response.json();
+      messageArea.removeChild(typing);
+      addMessage(data || "something went wrong", "ai");
+    } catch (error) {
+      console.log(error)
+        messageArea.removeChild(typing);
+      addMessage(data || "something went wrong", "ai");
+    }
+
   }
 })();
