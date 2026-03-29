@@ -116,7 +116,6 @@
   sendBtn.onclick = async ()=>{
     const text = input.value.trim();
 
-   
     if(!text)
     {
       return;
@@ -135,7 +134,7 @@
     })
 
     messageArea.appendChild(typing);
-    messageArea.scrollTop=messageArea.scrollHeight();
+    messageArea.scrollTop=messageArea.scrollHeight;
 
     // Getting response from Gemini
     try {
@@ -148,12 +147,13 @@
       })
 
       const data = await response.json();
+      // console.log(data.response);
       messageArea.removeChild(typing);
-      addMessage(data || "something went wrong", "ai");
+      addMessage(data.response || "something went wrong", "ai");
     } catch (error) {
       console.log(error)
         messageArea.removeChild(typing);
-      addMessage(data || "something went wrong", "ai");
+      addMessage(data.response || "something went wrong", "ai");
     }
 
   }
