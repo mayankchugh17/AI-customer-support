@@ -88,9 +88,9 @@ export default function EmbedClient({ ownerId }) {
            
             <div className="rounded-xl border border-zinc-300 bg-white shadow-md overflow-hidden ">
               <div className="flex items-center gap-2 px-4 h-9 bg-zinc-100 border-b border-zinc-200">
-                <span className="hidden md:block w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                <span className="hidden md:block w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                <span className="hidden md:block w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-green-400"></span>
                 <span className="ml-8 md:ml-4 text-xs  text-zinc-500">
                   Your-website.com
                 </span>
