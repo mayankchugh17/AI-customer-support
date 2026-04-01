@@ -21,7 +21,7 @@ export async function GET(request)
     response.cookies.set("access token", session.accessToken,{
         httpOnly:true,
         maxAge:24*60*60*1000,
-        secure:false,
+        secure:true,
         path:"/"
     });
 
