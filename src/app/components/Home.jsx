@@ -9,23 +9,29 @@ function Home({ email }) {
   // Navigation
   const navigate = useRouter();
 
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   // Go to login Page
   const handleLogin = () => {
+    setLoading(true);
     window.location.href = "/api/auth/login";
+    setLoading(false);
   };
 
   // Logout Handle 
   const handleLogout = async () =>{
     try {
+        setLoading(true);
         const result = await axios.get("/api/auth/logout");
         window.location.href = "/";
+        setLoading(false);
     } catch (error) {
         console.log(error)
     }
   }
 
 
-  const [open, setOpen] = useState(false);
   const popUpRef = useRef(null);
   useEffect(() => {
     const handler = (e) => {
@@ -101,8 +107,9 @@ function Home({ email }) {
                       <button
                         className="block px-4 py-3 text-sm md:text-lg text-red-600 hover:bg-zinc-100"
                         onClick={handleLogout}
+                        disabled={loading}
                       >
-                        Logout
+                        {loading ? "Logged Out" :"Logout"}
                       </button>
                     </motion.div>
                   )}
@@ -112,8 +119,9 @@ function Home({ email }) {
               <button
                 onClick={handleLogin}
                 className="btn text-lg md:text-xl px-5 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 flex items-center gap-2 "
+                disabled={loading}
               >
-                Login
+                {loading ? "Loading..." : "Login"}
               </button>
             )}
           </div>

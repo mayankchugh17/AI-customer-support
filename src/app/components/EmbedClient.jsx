@@ -84,39 +84,72 @@ export default function EmbedClient({ ownerId }) {
               This is how the chatbot will appear on your website{" "}
             </p>
            
+          
+           
             <div className="rounded-xl border border-zinc-300 bg-white shadow-md overflow-hidden ">
               <div className="flex items-center gap-2 px-4 h-9 bg-zinc-100 border-b border-zinc-200">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-                <span className="ml-4 text-xs text-zinc-500">
+                <span className="hidden md:block w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span className="hidden md:block w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                <span className="hidden md:block w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                <span className="ml-8 md:ml-4 text-xs  text-zinc-500">
                   Your-website.com
                 </span>
               </div>
-              <div className="relative h-64 sm:h-72 p-6 text-zinc-400 text-sm">
-                Your website goes here
-                <div className="absolute bottom-24 right-6 w-64 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden">
-                  <div className="bg-black text-white text-xs px-3 py-2 flex justify-between items-center">
-                    <span>Customer Support</span>
-                    <span>X</span>
-                  </div>
-                  <div className="p-3 space-y-2 bg-zinc-50">
-                    <div className="bg-zinc-200 text-zinc-800 text-xs px-3 py-2 rounded-lg w-fit">
-                      Hey! How can I help you?
-                    </div>
-                    <div className="bg-black text-white text-xs px-3 py-2 rounded-lg ml-auto w-fit">
-                      What is the return policy?
-                    </div>
-                  </div>
-                </div>
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ repeat: Infinity, duration:3}}
-                  className="absolute bottom-6 right-6 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-2xl cursor-pointer"
-                >
-                    🗨️
-                </motion.div>
-              </div>
+              <div className="relative h-64 sm:h-72 md:h-80 p-4 sm:p-6 text-zinc-400 text-xs sm:text-sm">
+  Your website goes here
+
+  {/* Chat Box */}
+  <div className="
+    absolute 
+    bottom-20 sm:bottom-24 
+    right-2 sm:right-6 
+    w-[90%] sm:w-64 md:w-72 
+    max-w-sm 
+    bg-white 
+    rounded-xl 
+    shadow-xl 
+    border border-zinc-200 
+    overflow-hidden
+  ">
+    
+    {/* Header */}
+    <div className="bg-black text-white text-xs px-3 py-2 flex justify-between items-center">
+      <span>Customer Support</span>
+      <span className="cursor-pointer">✕</span>
+    </div>
+
+    {/* Messages */}
+    <div className="p-3 space-y-2 bg-zinc-50">
+      <div className="bg-zinc-200 text-zinc-800 text-xs px-3 py-2 rounded-lg w-fit max-w-[80%]">
+        Hey! How can I help you?
+      </div>
+      <div className="bg-black text-white text-xs px-3 py-2 rounded-lg ml-auto w-fit max-w-[80%]">
+        What is the return policy?
+      </div>
+    </div>
+  </div>
+
+  {/* Floating Button */}
+  <motion.div
+    animate={{ y: [0, -8, 0] }}
+    transition={{ repeat: Infinity, duration: 3 }}
+    className="
+      absolute 
+      bottom-4 sm:bottom-6 
+      right-2 sm:right-6 
+      w-12 h-12 sm:w-14 sm:h-14 
+      text-lg sm:text-xl 
+      rounded-full 
+      bg-black 
+      text-white 
+      flex items-center justify-center 
+      shadow-2xl 
+      cursor-pointer
+    "
+  >
+    🗨️
+  </motion.div>
+</div>
             </div>
           </div>
         </motion.div>
